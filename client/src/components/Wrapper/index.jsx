@@ -1,9 +1,7 @@
-
 import CssBaseline from '@mui/material/CssBaseline';
-
 import Container from '@mui/material/Container';
 
-export default function Wrapper({children}) {
+const Wrapper = ({children}) => {
   return (
     <>
       <CssBaseline />
@@ -13,4 +11,4 @@ export default function Wrapper({children}) {
     </>
   );
 }
-
+export default Wrapper;

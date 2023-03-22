@@ -27,20 +27,21 @@ const createList = async (req, res) => {
     }
 };
 
-const updateListById = async (req, res) => {
+const addCardByListId = async (req, res) => {
     try {
 
         const listId = req.params.id; 
-        const { listTitle, cards } = req.body; 
+        const { card } = req.body; 
         
-        const updatedList = await List.findByIdAndUpdate(listId, { 
-            listTitle,
-            cards
-        }, { new: true });
+        const updatedList = await List.findByIdAndUpdate(
+            { _id: listId }, 
+            { $push: { cards: card } },
+            { new: true } 
+          );
         
         res.status(200).json(updatedList);
     } catch (error) {
-        res.status(500).json({ message: `Failed to update list, please try again. error: ${error} `});
+        res.status(500).json({ message: `Failed to add card by list id, please try again. error: ${error} `});
     }
 };
 
@@ -49,7 +50,7 @@ const updateLists = async (req, res) => {
 
         const listsUpdate = req.body; 
         const results = await Promise.all(listsUpdate.map(async (listUpdate) => {
-            const { _id, listTitle, cards} = listUpdate; // получаем id записи и обновленные данные из объекта
+            const { _id, listTitle, cards} = listUpdate;
       
             const result = await List.findByIdAndUpdate(_id, { 
                 listTitle,
@@ -83,7 +84,7 @@ const deleteCard = async (req, res) => {
             }
 
 
-        res.send(List);
+        res.status(200).send(List);
 
     } catch(error) {
         res.status(500).send(`Failed to delete card: ${error}`);
@@ -111,7 +112,7 @@ const deleteListById = async (req, res) => {
 module.exports = {
     getLists,
     createList,
-    updateListById,
+    addCardByListId,
     updateLists,
     deleteCard,
     deleteListById

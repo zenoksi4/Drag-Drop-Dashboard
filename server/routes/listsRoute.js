@@ -4,7 +4,7 @@ const {
     getLists, 
     createList, 
     updateLists,  
-    updateListById, 
+    addCardByListId, 
     deleteCard, 
     deleteListById
 } = require('../controllers/listsController')
@@ -14,7 +14,7 @@ router.get('/', getLists);
 
 router.post('/', createList);
 
-router.put('/:id', updateListById);
+router.put('/:id', addCardByListId);
 
 router.put('/', updateLists);
 

@@ -66,9 +66,53 @@ const updateLists = async (req, res) => {
     }
 };
 
+const deleteCard = async (req, res) => {
+    try {
+        const {listId, cardId} = req.body; 
+
+        const List = await List.findByIdAndUpdate(
+            { _id: listId },
+            { $pull: { cards: { _id: cardId } } }, 
+            { new: true } 
+
+        );
+
+
+        if (!List) {  
+            return res.status(404).send('List not found');
+            }
+
+
+        res.send(List);
+
+    } catch(error) {
+        res.status(500).send(`Failed to delete card: ${error}`);
+    }
+}
+
+const deleteListById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deleteList = await List.findByIdAndDelete(id);
+
+
+        if (!deleteList) {  
+            return res.status(404).send('Item not found');
+            }
+
+
+        res.send(deleteList);
+
+    } catch(error) {
+        res.status(500).send(`Failed to delete item: ${error}`);
+    }
+}
+
 module.exports = {
     getLists,
     createList,
     updateListById,
-    updateLists
+    updateLists,
+    deleteCard,
+    deleteListById
 }

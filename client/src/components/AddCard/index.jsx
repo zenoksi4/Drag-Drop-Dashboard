@@ -1,10 +1,12 @@
-import {useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
+import Card from '../Card';
+import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './styles.module.css'
 
-const AddList = () => {
+
+const AddCard = () => {
     const [isActive, setIsActive] = useState(false);
     const [text, setText] = useState('');
   
@@ -24,25 +26,35 @@ const AddList = () => {
         }
     
     };
-  
-    return (
-      <div className={styles.container}>
-        {
-        isActive ?
+  return (
+    <Card sx ={{padding: 0}} textAlign={'center'}>            
+
+        {isActive ?
             <div onBlur={(event) =>handleBlur(event)} >
-                <TextField size='small' autoFocus  onChange={handleChange}  />
+
+                <TextField
+                    autoFocus
+                    id="filled-multiline-static"
+                    label="Add Card"
+                    multiline
+                    rows={4}
+                    variant="filled"
+                    onChange={handleChange}
+                    sx={{width:'300px'}}
+                />
 
                 <div className={styles.buttons}>
                     <Button variant="contained" onClick={()=>{alert(text)}}>Add List</Button>
                     <CloseIcon sx={{fontSize: 35, cursor: 'pointer'}} className={styles.icon}/>
                 </div>
             </div>
-            :
-            <Button sx={{ fontSize: '1rem', marginBottom: '46.5px' }} onClick={handleClick}><AddSharpIcon/>Add List</Button>
-
+        :
+                <Button sx={{ fontSize: '0.8rem', color: 'black', justifyContent: 'center'}} onClick={handleClick}>
+                    <AddSharpIcon/>Add Card
+                </Button>
         }
-      </div>
-    );
-}
+    </Card>
 
-export default AddList;
+  );
+}
+export default AddCard;

@@ -1,0 +1,14 @@
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.icon:hover {
+    color: #585858;
+}
+.icon:active {
+    color: #7f7f7f;
+
+}

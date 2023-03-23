@@ -1,5 +1,6 @@
 
 import AddList from "./components/AddList";
+import Lists from "./components/Lists";
 import Wrapper from "./components/Wrapper";
 
 
@@ -8,7 +9,7 @@ function App() {
     <div className="App">
       <Wrapper>
         <AddList />
-
+        <Lists/>
       </Wrapper>
     </div>
   );

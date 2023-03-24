@@ -2,16 +2,17 @@
 import AddList from "./components/AddList";
 import Lists from "./components/Lists";
 import Wrapper from "./components/Wrapper";
-import { DragDropContext } from "react-beautiful-dnd";
+import { Provider } from 'react-redux';
+import { store } from "./store";
 
 function App() {
   return (
-    <div className="App">
+    <Provider store={store}>
       <Wrapper>
         <AddList />
         <Lists/>
       </Wrapper>
-    </div>
+    </Provider>
   );
 }
 

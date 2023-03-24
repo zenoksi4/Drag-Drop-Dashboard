@@ -1,6 +1,5 @@
 import { Button, ListItem, ListItemText, TextField } from '@mui/material';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
-import Card from '../Card';
 import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './styles.module.css'

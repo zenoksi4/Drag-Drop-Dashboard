@@ -12,11 +12,17 @@ const putLists = async (updateLists) => {
 
     return lists.data;
 }
-const createLists = async (Title) => {
+const createList = async (Title) => {
     
-    const lists = await axios.post('http://localhost:8000/api/lists', {listTitle: Title});
+    const createdList = await axios.post('http://localhost:8000/api/lists', {listTitle: Title});
 
-    return lists.data;
+    return createdList.data;
+}
+
+const deleteList = async (_id) => {
+    const deletedList = await axios.delete(`http://localhost:8000/api/lists/${_id}`);
+
+    return deletedList.data;
 }
 
 const updateLists = (state, action) => {
@@ -45,7 +51,8 @@ const updateLists = (state, action) => {
 const listsService = {
     getLists,
     putLists,
-    createLists,
+    createList,
+    deleteList,
     updateLists
 }
 

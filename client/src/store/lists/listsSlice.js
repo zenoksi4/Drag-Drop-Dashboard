@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import listsService from '../services/listsService';
 
 
-
 export const getLists = createAsyncThunk('GET_LISTS', async (_, thunkAPI) => {
     try {
 
@@ -14,15 +13,26 @@ export const getLists = createAsyncThunk('GET_LISTS', async (_, thunkAPI) => {
     }
 })
 
-export const createList = createAsyncThunk('CREATE_LISTS', async (Title, thunkAPI) => {
+export const createList = createAsyncThunk('CREATE_LIST', async (Title, thunkAPI) => {
     try {
 
-        return await listsService.createLists(Title);
+        return await listsService.createList(Title);
 
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data)
     }
 })
+
+export const deleteList = createAsyncThunk('DELETE_LIST', async (_id, thunkAPI) => {
+    try {
+
+        return await listsService.deleteList(_id);
+
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data)
+    }
+})
+
 
 const listsSlice = createSlice({
     name: 'lists',
@@ -56,6 +66,24 @@ const listsSlice = createSlice({
             state.lists.push(action.payload);
         });
         builder.addCase(createList.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload.message;
+            state.lists = null;
+        });
+
+
+        builder.addCase(deleteList.pending, (state) => {
+            state.isLoading = true
+        });
+        builder.addCase(deleteList.fulfilled, (state, action) => {
+            state.isLoading = false;
+
+            state.lists = state.lists.filter((list) => (
+                list._id !== action.payload._id
+            ))
+        });
+        builder.addCase(deleteList.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload.message;

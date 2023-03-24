@@ -14,7 +14,7 @@ const Lists = () => {
 
     useEffect(() => {
         dispatch(getLists())
-
+        console.log(lists);
     }, [dispatch]);
     
 
@@ -28,9 +28,12 @@ const Lists = () => {
     <DragDropContext onDragEnd={onDragEnd}>
 
     <div className={styles.container}>
-        {lists && lists.map((list) => (
+        {lists && Array.isArray(lists) ? lists.map((list) => (
         <ListContent key={list._id} _id={list._id} listTitle={list.listTitle} cards={list.cards}/>
-        ))}
+        )):
+        <div>{lists}</div>
+
+        }
 
 
     </div>

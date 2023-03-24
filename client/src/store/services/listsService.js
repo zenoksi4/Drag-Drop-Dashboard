@@ -12,6 +12,12 @@ const putLists = async (updateLists) => {
 
     return lists.data;
 }
+const createLists = async (Title) => {
+    
+    const lists = await axios.post('http://localhost:8000/api/lists', {listTitle: Title});
+
+    return lists.data;
+}
 
 const updateLists = (state, action) => {
     const {source, destination} = action.payload;
@@ -32,9 +38,12 @@ const updateLists = (state, action) => {
     putLists([sourceList[0], destinationList[0]]);
 }
 
+
+
 const listsService = {
     getLists,
     putLists,
+    createLists,
     updateLists
 }
 

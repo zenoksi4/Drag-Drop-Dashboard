@@ -3,17 +3,25 @@ import { Button, TextField } from '@mui/material';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './styles.module.css'
+import { useDispatch } from 'react-redux';
+import { createList } from '../../store/lists/listsSlice';
 
 const AddList = () => {
     const [isActive, setIsActive] = useState(false);
-    const [text, setText] = useState('');
+    const [title, setTitle] = useState('');
+    const dispatch = useDispatch()
   
+    const handleAddList = () => {
+      if (title.trim() !== ''){
+        dispatch(createList(title));
+      }
+    }
     const handleClick = () => {
         setIsActive(!isActive);
     };
   
     const handleChange = (event) => {
-      setText(event.target.value);
+      setTitle(event.target.value);
     };
   
     const handleBlur = (event) => {
@@ -33,7 +41,7 @@ const AddList = () => {
                 <TextField size='small' autoFocus  onChange={handleChange}  />
 
                 <div className={styles.buttons}>
-                    <Button variant="contained" onClick={()=>{alert(text)}}>Add List</Button>
+                    <Button variant="contained" onClick={handleAddList}>Add List</Button>
                     <CloseIcon sx={{fontSize: 35, cursor: 'pointer'}} className={styles.icon}/>
                 </div>
             </div>

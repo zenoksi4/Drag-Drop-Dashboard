@@ -33,6 +33,8 @@ const updateLists = (state, action) => {
     let sourceList = state.lists.filter((list) => (list._id === source.droppableId))
     let destinationList = state.lists.filter((list) => (list._id === destination.droppableId))
     let card = sourceList[0].cards[source.index]
+    card.date = new Date().toISOString()
+
     sourceList[0].cards.splice(source.index, 1)
     destinationList[0].cards.splice(destination.index, 0, card)
     putLists([sourceList[0], destinationList[0]]);

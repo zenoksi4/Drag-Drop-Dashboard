@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import listsService from '../services/listsService';
 
 
@@ -13,6 +14,8 @@ export const getLists = createAsyncThunk('GET_LISTS', async (_, thunkAPI) => {
     }
 })
 
+
+
 const listsSlice = createSlice({
     name: 'lists',
     initialState: {
@@ -20,7 +23,28 @@ const listsSlice = createSlice({
         isError: false,
         isLoading: false,
         message: ''
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getLists.pending, (state) => {
+            state.isLoading = true
+        });
+        builder.addCase(getLists.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.lists = action.payload;
+        });
+        builder.addCase(getLists.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload.message;
+            state.lists = null;
+        });
+
+    },
+    reducers: {
+        onDragCard: listsService.updateLists
     }
 });
+
+export const { onDragCard } = listsSlice.actions;
 
 export default listsSlice.reducer;

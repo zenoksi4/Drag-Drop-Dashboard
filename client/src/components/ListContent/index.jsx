@@ -9,12 +9,12 @@ import styles from './styles.module.css'
 import { useState } from 'react';
 
 
-const ListContent = ({id, listTitle, cards}) => {
+const ListContent = ({_id, listTitle, cards}) => {
 
   const [isSort, setIsSort] = useState(false)
 
   return (
-      <Droppable droppableId={id}>
+      <Droppable droppableId={_id}>
         {(provided) => (
           <div className={styles.content} ref={provided.innerRef} {...provided.droppableProps}>
             <h1 className={styles.title}>{listTitle}</h1>
@@ -30,7 +30,7 @@ const ListContent = ({id, listTitle, cards}) => {
                 
                 </div>
                 {cards.map((card, index) => (
-                  <Card key={card.id} id={card.id} date={card.date} index={index}>{card.title} </Card>
+                  <Card key={card._id} _id={card._id} date={card.date} index={index}>{card.title} </Card>
                 ))}
                 {provided.placeholder}
                 

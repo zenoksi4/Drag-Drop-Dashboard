@@ -5,7 +5,7 @@ import styles from './styles.module.css'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Draggable } from 'react-beautiful-dnd';
 
-const Card = ({children, sx, textAlign, date, index, id}) => {
+const Card = ({children, sx, textAlign, date, index, _id}) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -17,7 +17,7 @@ const Card = ({children, sx, textAlign, date, index, id}) => {
     };
   
     return (
-        <Draggable draggableId={id} index={index}>
+        <Draggable draggableId={_id} index={index}>
 
             {(provided) => (
                 <div 

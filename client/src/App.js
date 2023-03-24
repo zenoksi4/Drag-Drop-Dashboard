@@ -2,17 +2,17 @@
 import AddList from "./components/AddList";
 import Lists from "./components/Lists";
 import Wrapper from "./components/Wrapper";
-import { Provider } from 'react-redux';
-import { store } from "./store";
+import { useDispatch, useSelector } from 'react-redux';
+import { getLists } from "./store/lists/listsSlice";
+import { useEffect } from "react";
 
 function App() {
+
   return (
-    <Provider store={store}>
       <Wrapper>
         <AddList />
         <Lists/>
       </Wrapper>
-    </Provider>
   );
 }
 

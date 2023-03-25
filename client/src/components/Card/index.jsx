@@ -7,7 +7,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
 import { deleteCardList } from '../../store/lists/listsSlice';
 
-const Card = ({children, sx, textAlign, date, index, _id, listId}) => {
+const Card = ({children, sx, textAlign, date, index, _id, listId, setIsSort}) => {
     const [isHovered, setIsHovered] = useState(false);
     const dispatch = useDispatch();
 
@@ -16,15 +16,38 @@ const Card = ({children, sx, textAlign, date, index, _id, listId}) => {
         dispatch(deleteCardList({listId, cardId}))
     }
     const handleMouseEnter = () => {
-      setIsHovered(true);
+        setIsSort(false)
+        setIsHovered(true);
     };
   
     const handleMouseLeave = () => {
       setIsHovered(false);
     };
+
+    const formatDate = (date) => {
+        const diff = Math.floor((new Date() - new Date(date)) / 1000);
+      
+        if (diff < 60 && diff > 0) {
+          return `${diff} seconds ago`;
+        } else if (diff <= 0) {
+            return `1 seconds ago`;
+        } else if (diff < 60 * 60) {
+          const minutes = Math.floor(diff / 60);
+          return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+        } else if (diff < 60 * 60 * 24) {
+          const hours = Math.floor(diff / (60 * 60));
+          return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+        } else if (diff < 60 * 60 * 24 * 30) {
+          const days = Math.floor(diff / (60 * 60 * 24));
+          return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+        } else {
+          const months = Math.floor(diff / (60 * 60 * 24 * 30));
+          return `${months} ${months === 1 ? 'month' : 'months'} ago`;
+        }
+      };
   
     return (
-        <Draggable draggableId={_id} index={index}>
+        <Draggable draggableId={_id} index={index} >
 
             {(provided) => (
                 <div 
@@ -43,7 +66,7 @@ const Card = ({children, sx, textAlign, date, index, _id, listId}) => {
 
                             { isHovered &&
                                 <div className={styles.cardBar}>
-                                    <div>{date}</div>
+                                    <div>{formatDate(new Date(date))}</div>
                                     <DeleteIcon onClick={onDeleteCard} className={styles.icon}/>
                                 </div>
                             }

@@ -12,7 +12,7 @@ const AddList = () => {
     const dispatch = useDispatch()
   
     const handleAddList = () => {
-      if (title.trim() !== ''){
+      if (title !== ''){
         dispatch(createList(title));
       }
     }
@@ -21,7 +21,7 @@ const AddList = () => {
     };
   
     const handleChange = (event) => {
-      setTitle(event.target.value);
+      setTitle(event.target.value.trim());
     };
   
     const handleBlur = (event) => {

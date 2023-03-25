@@ -2,7 +2,7 @@ import Container from '@mui/material/Container';
 
 const Wrapper = ({children}) => {
   return (
-      <Container maxWidth="xl">
+      <Container sx={{overflow: 'auto'}} maxWidth="xl">
         {children}
       </Container>
   );

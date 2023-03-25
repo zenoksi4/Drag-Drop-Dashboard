@@ -13,11 +13,11 @@ const AddCard = ({listId}) => {
     const dispatch = useDispatch();
   
     const handleAddCard = () => {
-        if (titleCard.trim() !== ''){
+        if (titleCard !== ''){
 
         dispatch(createCardList({listId, titleCard}));
         setIsActive(false);
-        
+
         }
     }
 
@@ -26,7 +26,7 @@ const AddCard = ({listId}) => {
     };
   
     const handleChange = (event) => {
-        setTitleCard(event.target.value);
+        setTitleCard(event.target.value.trim());
     };
   
     const handleBlur = (event) => {

@@ -28,6 +28,9 @@
     justify-content: center;
 
 }
+.icon{
+    display: flex;
+}
 
 .icon:hover{
     cursor: pointer;

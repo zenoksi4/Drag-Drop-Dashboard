@@ -129,10 +129,11 @@ const listsSlice = createSlice({
         });
     },
     reducers: {
-        onDragCard: listsService.updateLists
+        onDragCard: listsService.updateLists,
+        onSortCard: listsService.sortCards
     }
 });
 
-export const { onDragCard } = listsSlice.actions;
+export const { onDragCard, onSortCard } = listsSlice.actions;
 
 export default listsSlice.reducer;

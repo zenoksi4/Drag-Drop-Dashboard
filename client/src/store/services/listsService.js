@@ -1,26 +1,28 @@
 import axios from 'axios'
 
+const proxy = 'http://localhost:8000'
+
 const getLists = async () => {
-    const lists = await axios.get('http://localhost:8000/api/lists');
+    const lists = await axios.get(`${proxy}/api/lists`);
 
     return lists.data;
 }
 
 const putLists = async (updateLists) => {
     
-    const lists = await axios.put('http://localhost:8000/api/lists', updateLists);
+    const lists = await axios.put(`${proxy}/api/lists`, updateLists);
 
     return lists.data;
 }
 const createList = async (Title) => {
     
-    const createdList = await axios.post('http://localhost:8000/api/lists', {listTitle: Title});
+    const createdList = await axios.post(`${proxy}/api/lists`, {listTitle: Title});
 
     return createdList.data;
 }
 
 const deleteList = async (_id) => {
-    const deletedList = await axios.delete(`http://localhost:8000/api/lists/${_id}`);
+    const deletedList = await axios.delete(`${proxy}/api/lists/${_id}`);
 
     return deletedList.data;
 }
@@ -49,18 +51,31 @@ const updateLists = (state, action) => {
 
 const createCardList = async (listId, titleCard) => {
     
-    const createdList = await axios.put(`http://localhost:8000/api/lists/${listId}`, {title: titleCard});
+    const createdList = await axios.put(`${proxy}/api/lists/${listId}`, {title: titleCard});
 
     return createdList.data;
 }
 
 const deleteCardList = async (listId, cardId) => {
 
-    const deletedCardList = await axios.delete('http://localhost:8000/api/lists/card', { data: { listId: listId, cardId: cardId }});
+    const deletedCardList = await axios.delete(`${proxy}/api/lists/card`, { data: { listId: listId, cardId: cardId }});
 
     return deletedCardList.data;
 }
 
+
+const sortCards = (state, action) => {
+    const {_id, sortByDate} = action.payload
+    let sortList = state.lists.filter((list) => (list._id === _id))
+
+    sortByDate?
+        sortList[0].cards.sort((a, b) => new Date(b.date) - new Date(a.date))
+    :
+        sortList[0].cards.sort((a, b) => new Date(a.date) - new Date(b.date))
+    
+    putLists(sortList);
+
+}
 
 const listsService = {
     getLists,
@@ -69,7 +84,8 @@ const listsService = {
     deleteList,
     updateLists,
     createCardList,
-    deleteCardList
+    deleteCardList,
+    sortCards
 }
 
 export default listsService;

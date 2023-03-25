@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const proxy = 'http://localhost:8000'
+const proxy = 'https://draganddrop-dashboard.onrender.com'
 
 const getLists = async () => {
     const lists = await axios.get(`${proxy}/api/lists`);
@@ -41,7 +41,10 @@ const updateLists = (state, action) => {
     let sourceList = state.lists.filter((list) => (list._id === source.droppableId))
     let destinationList = state.lists.filter((list) => (list._id === destination.droppableId))
     let card = sourceList[0].cards[source.index]
-    card.date = new Date().toISOString()
+    if(!(destination.droppableId === source.droppableId)){
+        card.date = new Date().toISOString()
+    }
+
 
     sourceList[0].cards.splice(source.index, 1)
     destinationList[0].cards.splice(destination.index, 0, card)

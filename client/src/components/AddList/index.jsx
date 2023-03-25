@@ -17,6 +17,7 @@ const AddList = () => {
     const handleAddList = () => {
       if (title !== '' && !isLoading){
         dispatch(createList(title));
+        setIsActive(false);
       }
     }
     const handleClick = () => {

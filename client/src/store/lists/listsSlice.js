@@ -33,6 +33,16 @@ export const deleteList = createAsyncThunk('DELETE_LIST', async (_id, thunkAPI) 
     }
 })
 
+export const createCardList = createAsyncThunk('CREATE_CARD_LIST', async ({listId, titleCard}, thunkAPI) => {
+    try {
+
+        return await listsService.createCardList(listId, titleCard);
+
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data)
+    }
+})
+
 
 const listsSlice = createSlice({
     name: 'lists',
@@ -84,6 +94,24 @@ const listsSlice = createSlice({
             ))
         });
         builder.addCase(deleteList.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload.message;
+            state.lists = null;
+        });
+
+
+        builder.addCase(createCardList.pending, (state) => {
+            state.isLoading = true
+        });
+        builder.addCase(createCardList.fulfilled, (state, action) => {
+            state.isLoading = false;
+
+            const addCardToList = state.lists.find(list => list._id === action.payload._id);
+            addCardToList.cards = action.payload.cards
+
+        });
+        builder.addCase(createCardList.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload.message;

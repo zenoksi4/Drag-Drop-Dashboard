@@ -3,18 +3,30 @@ import AddSharpIcon from '@mui/icons-material/AddSharp';
 import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './styles.module.css'
+import { useDispatch } from 'react-redux';
+import { createCardList } from '../../store/lists/listsSlice';
 
 
-const AddCard = () => {
+const AddCard = ({listId}) => {
     const [isActive, setIsActive] = useState(false);
-    const [text, setText] = useState('');
+    const [titleCard, setTitleCard] = useState('');
+    const dispatch = useDispatch();
   
+    const handleAddCard = () => {
+        if (titleCard.trim() !== ''){
+
+        dispatch(createCardList({listId, titleCard}));
+        setIsActive(false);
+        
+        }
+    }
+
     const handleClick = () => {
         setIsActive(!isActive);
     };
   
     const handleChange = (event) => {
-      setText(event.target.value);
+        setTitleCard(event.target.value);
     };
   
     const handleBlur = (event) => {
@@ -45,7 +57,7 @@ const AddCard = () => {
                         />
 
                         <div className={styles.buttons}>
-                            <Button variant="contained" onClick={()=>{alert(text)}}>Add List</Button>
+                            <Button variant="contained" onClick={handleAddCard}>Add List</Button>
                             <CloseIcon sx={{fontSize: 35, cursor: 'pointer'}} className={styles.icon}/>
                         </div>
                     </div>

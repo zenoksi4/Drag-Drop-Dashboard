@@ -47,13 +47,21 @@ const updateLists = (state, action) => {
 }
 
 
+const createCardList = async (listId, titleCard) => {
+    
+    const createdList = await axios.put(`http://localhost:8000/api/lists/${listId}`, {title: titleCard});
+
+    return createdList.data;
+}
+
 
 const listsService = {
     getLists,
     putLists,
     createList,
     deleteList,
-    updateLists
+    updateLists,
+    createCardList
 }
 
 export default listsService;

@@ -31,11 +31,12 @@ const addCardByListId = async (req, res) => {
     try {
 
         const listId = req.params.id; 
-        const { card } = req.body; 
+        const { title } = req.body;
+
         
         const updatedList = await List.findByIdAndUpdate(
             { _id: listId }, 
-            { $push: { cards: card } },
+            { $push: { cards: {title: title} } },
             { new: true } 
           );
         

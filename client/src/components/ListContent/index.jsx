@@ -50,7 +50,7 @@ const ListContent = ({_id, listTitle, cards}) => {
                 {provided.placeholder}
                 
 
-                <AddCard/>
+                <AddCard listId={_id}/>
     
               </List>
             </div>

@@ -65,12 +65,12 @@ const Card = ({children, sx, textAlign, date, index, _id, listId, setIsSort}) =>
                         <div className={styles.listCard}>
                             <ListItemText sx={{textAlign: textAlign}}>{children}</ListItemText>
 
-                            { isHovered &&
-                                <div className={styles.cardBar}>
+
+                                <div className={`${styles.cardBar} ${!isHovered && styles.hide}`}>
                                     <div>{formatDate(new Date(date))}</div>
                                     <DeleteIcon onClick={onDeleteCard} className={styles.icon}/>
                                 </div>
-                            }
+
                         </div>
 
                     :

@@ -1,6 +1,7 @@
 .cardContent{
     margin: 5px 10px;
     color: #5e6c84;
+
 }
 
 .background {
@@ -17,6 +18,15 @@
     color: #383838;
     font-size: 14px;
     font-weight: bold;
+    opacity: 1;
+    height: 20px;
+    transition: opacity 0.3s ease-in-out, height 0.2s ease-in-out;
+
+}
+
+.hide{
+    opacity: 0;
+    height: 0;
 }
 
 

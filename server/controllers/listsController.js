@@ -72,20 +72,18 @@ const deleteCard = async (req, res) => {
     try {
         const {listId, cardId} = req.body; 
 
-        const List = await List.findByIdAndUpdate(
+        const deletedCardList = await List.findByIdAndUpdate(
             { _id: listId },
             { $pull: { cards: { _id: cardId } } }, 
             { new: true } 
 
         );
 
-
-        if (!List) {  
+        if (!deletedCardList) {  
             return res.status(404).send('List not found');
             }
 
-
-        res.status(200).send(List);
+        res.status(200).send(deletedCardList);
 
     } catch(error) {
         res.status(500).send(`Failed to delete card: ${error}`);

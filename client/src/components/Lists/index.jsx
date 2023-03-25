@@ -14,7 +14,7 @@ const Lists = () => {
 
     useEffect(() => {
         dispatch(getLists())
-        console.log(lists);
+
     }, [dispatch]);
     
 

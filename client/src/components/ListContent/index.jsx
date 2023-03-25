@@ -45,7 +45,12 @@ const ListContent = ({_id, listTitle, cards}) => {
                   }
                 </div>
                 {cards.map((card, index) => (
-                  <Card key={card._id} _id={card._id} date={card.date} index={index}>{card.title} </Card>
+                  <Card key={card._id} 
+                    _id={card._id} 
+                    date={card.date} 
+                    index={index}
+                    listId={_id}
+                  >{card.title} </Card>
                 ))}
                 {provided.placeholder}
                 

@@ -54,6 +54,13 @@ const createCardList = async (listId, titleCard) => {
     return createdList.data;
 }
 
+const deleteCardList = async (listId, cardId) => {
+
+    const deletedCardList = await axios.delete('http://localhost:8000/api/lists/card', { data: { listId: listId, cardId: cardId }});
+
+    return deletedCardList.data;
+}
+
 
 const listsService = {
     getLists,
@@ -61,7 +68,8 @@ const listsService = {
     createList,
     deleteList,
     updateLists,
-    createCardList
+    createCardList,
+    deleteCardList
 }
 
 export default listsService;

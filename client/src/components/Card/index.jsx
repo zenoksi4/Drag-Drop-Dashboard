@@ -4,10 +4,17 @@ import { useState } from 'react';
 import styles from './styles.module.css'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Draggable } from 'react-beautiful-dnd';
+import { useDispatch } from 'react-redux';
+import { deleteCardList } from '../../store/lists/listsSlice';
 
-const Card = ({children, sx, textAlign, date, index, _id}) => {
+const Card = ({children, sx, textAlign, date, index, _id, listId}) => {
     const [isHovered, setIsHovered] = useState(false);
+    const dispatch = useDispatch();
 
+    const onDeleteCard = () => {
+        const cardId = _id
+        dispatch(deleteCardList({listId, cardId}))
+    }
     const handleMouseEnter = () => {
       setIsHovered(true);
     };
@@ -37,7 +44,7 @@ const Card = ({children, sx, textAlign, date, index, _id}) => {
                             { isHovered &&
                                 <div className={styles.cardBar}>
                                     <div>{date}</div>
-                                    <DeleteIcon className={styles.icon}/>
+                                    <DeleteIcon onClick={onDeleteCard} className={styles.icon}/>
                                 </div>
                             }
                         </div>

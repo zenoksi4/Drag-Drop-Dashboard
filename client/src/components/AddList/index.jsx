@@ -1,18 +1,21 @@
 import {useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createList } from '../../store/lists/listsSlice';
 import { Button, TextField } from '@mui/material';
 import AddSharpIcon from '@mui/icons-material/AddSharp';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './styles.module.css'
-import { useDispatch } from 'react-redux';
-import { createList } from '../../store/lists/listsSlice';
+
 
 const AddList = () => {
     const [isActive, setIsActive] = useState(false);
     const [title, setTitle] = useState('');
+    const { isLoading } = useSelector((state) => state.lists);
+
     const dispatch = useDispatch()
   
     const handleAddList = () => {
-      if (title !== ''){
+      if (title !== '' && !isLoading){
         dispatch(createList(title));
       }
     }

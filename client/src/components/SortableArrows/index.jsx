@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
-import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 import { onSortCard } from "../../store/lists/listsSlice";
 import { useDispatch } from "react-redux";
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
+
 
 const SortableArrows = ({_id}) => {
     const [sortByDate, setSortByDate] = useState(true);

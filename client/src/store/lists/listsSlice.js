@@ -64,7 +64,7 @@ const listsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getLists.pending, (state) => {
-            state.isLoading = true
+            state.isLoading = true;
         });
         builder.addCase(getLists.fulfilled, (state, action) => {
             state.isLoading = false;

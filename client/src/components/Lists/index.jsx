@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import { getLists, onDragCard, updateLists } from "../../store/lists/listsSlice";
+import { getLists, onDragCard } from "../../store/lists/listsSlice";
 import ListContent from "../ListContent";
+import Loader from "../Loader";
 import styles from './styles.module.css'
 
 
@@ -25,20 +26,25 @@ const Lists = () => {
     }
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <>
+    {
+      isLoading?
+        <Loader/>
+      :
+        <DragDropContext onDragEnd={onDragEnd}>
 
-    <div className={styles.container}>
-        {lists && Array.isArray(lists) ? lists.map((list) => (
-        <ListContent key={list._id} _id={list._id} listTitle={list.listTitle} cards={list.cards}/>
-        )):
-        <div>{lists}</div>
+        <div className={styles.container}>
+            {lists && Array.isArray(lists) ? lists.map((list) => (
+            <ListContent key={list._id} _id={list._id} listTitle={list.listTitle} cards={list.cards}/>
+            )):
+            <div>{lists}</div>
 
-        }
+            }
+        </div>
+        </DragDropContext>
+    }
 
-
-    </div>
-    </DragDropContext>
-
+  </>
   );
 }
 export default Lists;

@@ -12,7 +12,7 @@ function App() {
         <AddList />
       </Wrapper>
 
-      <Wrapper>
+      <Wrapper sx={{minHeight: '83vh'}}>
         <Lists/>
       </Wrapper>
     </>

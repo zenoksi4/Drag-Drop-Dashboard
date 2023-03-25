@@ -1,11 +1,12 @@
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
 import { useState } from 'react';
-import styles from './styles.module.css'
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Draggable } from 'react-beautiful-dnd';
 import { useDispatch } from 'react-redux';
 import { deleteCardList } from '../../store/lists/listsSlice';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Draggable } from 'react-beautiful-dnd';
+import styles from './styles.module.css'
+
 
 const Card = ({children, sx, textAlign, date, index, _id, listId, setIsSort}) => {
     const [isHovered, setIsHovered] = useState(false);

@@ -1,14 +1,14 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteList } from '../../store/lists/listsSlice';
 import List from '@mui/material/List';
 import Card from '../Card';
 import AddCard from '../AddCard';
 import { Droppable } from 'react-beautiful-dnd';
 import UpdateRoundedIcon from '@mui/icons-material/UpdateRounded';
-import styles from './styles.module.css'
-import { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useDispatch } from 'react-redux';
-import { deleteList } from '../../store/lists/listsSlice';
 import SortableArrows from '../SortableArrows';
+import styles from './styles.module.css'
 
 
 
